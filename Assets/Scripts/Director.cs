@@ -33,8 +33,8 @@ public class Director : MonoBehaviour {
 		else
 			levelSpeed = speed;
 		floor.GetComponent<BackgroundScroller>().speed = levelSpeed;
-		BG1.GetComponent<BackgroundScroller>().speed = levelSpeed*.75f;
-		BG2.GetComponent<BackgroundScroller>().speed = levelSpeed*.15f;
+		BG1.GetComponent<BackgroundScroller>().speed = levelSpeed*.15f;
+		BG2.GetComponent<BackgroundScroller>().speed = levelSpeed*.75f;
 	}
 	
 	int crashCounter = 0;
@@ -42,19 +42,21 @@ public class Director : MonoBehaviour {
 	public void ShowHitMessage(FaceController face) {
 		string message;
 		if ((pony.GetCurrentState() & CharController.State.BURST) == CharController.State.BURST)  {
+			Debug.Log ("broke a box");
 			message = dashEffects[dashCounter];
 			dashCounter = Mathf.Min (dashEffects.Length-1, ++dashCounter);
-			//GUIbg.renderer.material.SetColor("_TintColor", Color.blue);
+			GUIbg.renderer.material.SetColor("_TintColor", Color.blue);
 			StartCoroutine(fadeToFrom(Color.black, Color.blue));
 			face.Explode(true);
 			pony.Explode();
 		} else {
+			Debug.Log ("bumped a box");
 			message = crashEffects[crashCounter];
 			cam.Shake();
 			face.Explode(true);
 			crashCounter = Mathf.Min (crashEffects.Length-1, ++crashCounter);
 			StartCoroutine(fadeToFrom(Color.black, Color.red));
-			//GUIbg.renderer.material.SetColor("_TintColor", Color.red);
+			GUIbg.renderer.material.SetColor("_TintColor", Color.red);
 		}
 		if (dashCounter+crashCounter >= crashEffects.Length + dashEffects.Length - 2) {
 			ended = true;

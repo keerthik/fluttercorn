@@ -21,7 +21,7 @@ public class FaceController : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other) {
 		// Not another interactable
-		if (other.GetComponent<CharController>()) {
+		if (!hit && other.GetComponent<CharController>()) {
 			director.ShowHitMessage(this);
 		}
 	}	
