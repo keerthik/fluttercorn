@@ -22,6 +22,7 @@ public class IntroController : MonoBehaviour {
 	float timer = 0f;
 	float clicktime = 0.05f;
 	int displayedLength = 0;
+
 	void UpdateText() {
 		if (textDisplayed) return;
 		if (timer == 0) {
@@ -43,13 +44,14 @@ public class IntroController : MonoBehaviour {
 		}
 		if (Input.GetKeyUp(KeyCode.X) || Input.GetKeyUp(KeyCode.Z)) {
 			if (mindex < message.Length-1) {
+				displayedLength = 0;
 				mindex++;
 				currentText = message[mindex];
 				sceneParts[mindex-1].SetActiveRecursively(true);
 				cam.Shake();
 				textbox.text = "";
 				textDisplayed = false;
-				textbox.transform.Translate(new Vector3(0.1f, -0.1f, 0f));
+				textbox.transform.Translate(new Vector3(0f, -0.1f, 0f));
 			} else Application.LoadLevel("Gameplay");
 		}
 	}
