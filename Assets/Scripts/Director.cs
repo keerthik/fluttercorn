@@ -42,7 +42,6 @@ public class Director : MonoBehaviour {
 	public void ShowHitMessage(FaceController face) {
 		string message;
 		if ((pony.GetCurrentState() & CharController.State.BURST) == CharController.State.BURST)  {
-			Debug.Log ("broke a box");
 			message = dashEffects[dashCounter];
 			dashCounter = Mathf.Min (dashEffects.Length-1, ++dashCounter);
 			GUIbg.renderer.material.SetColor("_TintColor", Color.blue);
@@ -50,7 +49,6 @@ public class Director : MonoBehaviour {
 			face.Explode(true);
 			pony.Explode();
 		} else {
-			Debug.Log ("bumped a box");
 			message = crashEffects[crashCounter];
 			cam.Shake();
 			face.Explode(true);
